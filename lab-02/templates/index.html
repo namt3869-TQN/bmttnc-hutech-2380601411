@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Mô Phỏng Mã Hóa Giao Diện Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: Arial, sans-serif; }
+        .card { background-color: #1e1e1e; border: 1px solid #333; margin-bottom: 20px; }
+        .form-control, .form-select { background-color: #2d2d2d; border: 1px solid #444; color: #fff; }
+        .form-control:focus, .form-select:focus { background-color: #333; border-color: #0d6efd; color: #fff; }
+        .btn-primary { background-color: #0d6efd; border: none; }
+        .btn-success { background-color: #198754; border: none; }
+        .result-box { background-color: #252525; padding: 15px; border-radius: 5px; border: 1px dashed #555; min-height: 50px; word-break: break-all; }
+        h1, h3 { color: #0d6efd; }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">HỆ THỐNG MÃ HÓA BẢO MẬT THÔNG TIN</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h3>Cấu Hồng Thuật Toán</h3>
+                <div class="mb-3 mt-3">
+                    <label class="form-label">Chọn Thuật Toán:</label>
+                    <select id="cipher-select" class="form-select">
+                        <option value="caesar">Mã hóa Caesar</option>
+                        <option value="vigenere">Mã hóa Vigenère</option>
+                        <option value="railfence">Mã hóa Rail Fence</option>
+                        <option value="playfair">Mã hóa Playfair</option>
+                        <option value="transposition">Mã hóa Transposition</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Văn Bản (Plaintext / Ciphertext):</label>
+                    <textarea id="input-text" class="form-control" rows="4" placeholder="Nhập chuỗi văn bản cần xử lý..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Khóa (Key):</label>
+                    <input type="text" id="cipher-key" class="form-control" placeholder="Nhập số hoặc chữ tùy thuật toán">
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button onclick="processCipher('encrypt')" class="btn btn-primary me-2">Mã Hóa</button>
+                    <button onclick="processCipher('decrypt')" class="btn btn-success">Giải Mã</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h3>Kết Quả Xử Lý</h3>
+                <div class="mt-4">
+                    <h5>Kết quả hiển thị:</h5>
+                    <div id="output-result" class="result-box text-white font-monospace">Chưa có dữ liệu xử lý...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function processCipher(action) {
+    const cipher = document.getElementById('cipher-select').value;
+    const text = document.getElementById('input-text').value;
+    const key = document.getElementById('cipher-key').value;
+    const resultBox = document.getElementById('output-result');
+
+    if (!text || !key) {
+        alert('Vui lòng nhập đầy đủ văn bản và khóa!');
+        return;
+    }
+
+    let url = `/${cipher}`;
+    let payload = {};
+
+    if (action === 'encrypt') {
+        payload = { "plain_text": text, "key": key };
+    } else {
+        url = `/${cipher}/decrypt`;
+        payload = { "cipher_text": text, "key": key };
+    }
+
+    resultBox.innerHTML = "Đang xử lý...";
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (action === 'encrypt') {
+            resultBox.innerText = data.encrypted_text || "Lỗi xử lý dữ liệu";
+        } else {
+            resultBox.innerText = data.decrypted_text || "Lỗi xử lý dữ liệu";
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        resultBox.innerText = "Có lỗi xảy ra trong quá trình kết nối API server.";
+    });
+}
+</script>
+</body>
+</html>
