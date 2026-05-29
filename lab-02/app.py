@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from cipher.caesar import CaesarCipher
 from cipher.vigenere import VigenereCipher
 from cipher.railfence import RailFenceCipher
@@ -102,6 +102,5 @@ def transposition_decrypt():
     decrypted_text = cipher.decrypt_transposition(cipher_text, key)
     return jsonify({"decrypted_text": decrypted_text})
 
-# MAIN
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
