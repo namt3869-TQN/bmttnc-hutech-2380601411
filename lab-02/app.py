@@ -7,11 +7,6 @@ from cipher.transposition import TranspositionCipher
 
 app = Flask(__name__)
 
-# HOME ROUTE (HIỂN THỊ GIAO DIỆN INDEX.HTML)
-@app.route("/")
-def home():
-    return render_template("index.html")
-
 # CAESAR ROUTE
 @app.route("/caesar", methods=["POST"])
 def caesar_encrypt():
