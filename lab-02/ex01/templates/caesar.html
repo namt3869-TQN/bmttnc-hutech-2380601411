@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher - Dark Blue Edition</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body { background: linear-gradient(135deg, #0b111e 0%, #111a2e 50%, #070b14 100%); font-family: 'Segoe UI', sans-serif; color: #e2e8f0; min-height: 100vh; padding: 40px 0; }
+        .glass-card { background: rgba(17, 24, 39, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 20px; padding: 35px; backdrop-filter: blur(15px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); margin-bottom: 30px; }
+        h2.title { color: #38bdf8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); margin-bottom: 30px; }
+        .section-header { color: #38bdf8; font-size: 1.2rem; font-weight: 700; border-bottom: 1px solid rgba(56, 189, 248, 0.2); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; }
+        .form-control { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); color: #fff; border-radius: 10px; transition: all 0.3s; }
+        .form-control:focus { background: rgba(15, 23, 42, 1); border-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); color: #fff; }
+        label { font-weight: 600; color: #94a3b8; }
+        .btn-neon-blue { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: none; color: white; font-weight: 700; padding: 10px 25px; border-radius: 10px; transition: 0.3s; width: 100%; }
+        .btn-neon-blue:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4); }
+        .btn-back { background: rgba(30, 41, 59, 0.5); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 10px; padding: 10px 20px; text-decoration: none !important; display: inline-block; }
+        .btn-back:hover { background: #334155; color: #fff; }
+        .alert-result { background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; color: #38bdf8; border-radius: 12px; padding: 15px; margin-top: 20px; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2 class="title">Caesar Cipher</h2>
+        
+        <div class="row text-left">
+            <div class="col-md-6">
+                <div class="glass-card h-100">
+                    <div class="section-header"><i class="fas fa-lock mr-2"></i> Encryption</div>
+                    <form action="/encrypt" method="post">
+                        <div class="form-group">
+                            <label>Plain Text:</label>
+                            <textarea class="form-control" name="inputPlainText" rows="3" placeholder="Enter text...">{{ original_text if original_text }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Key (Integer):</label>
+                            <input type="text" class="form-control" name="inputKeyPlain" value="{{ key if key }}" placeholder="Nhập số nguyên...">
+                        </div>
+                        <button type="submit" class="btn-neon-blue">ENCRYPT</button>
+                    </form>
+                    {% if encrypted_text %}
+                    <div class="alert-result">
+                        <strong>Result:</strong><br>{{ encrypted_text }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="glass-card h-100">
+                    <div class="section-header"><i class="fas fa-unlock-alt mr-2"></i> Decryption</div>
+                    <form action="/decrypt" method="post">
+                        <div class="form-group">
+                            <label>Cipher Text:</label>
+                            <textarea class="form-control" name="inputCipherText" rows="3" placeholder="Enter cipher...">{{ original_text if original_text }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Key (Integer):</label>
+                            <input type="text" class="form-control" name="inputKeyCipher" value="{{ key if key }}" placeholder="Nhập số nguyên...">
+                        </div>
+                        <button type="submit" class="btn-neon-blue" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">DECRYPT</button>
+                    </form>
+                    {% if decrypted_text %}
+                    <div class="alert-result" style="border-color: #10b981; color: #10b981; background: rgba(16, 185, 129, 0.1);">
+                        <strong>Result:</strong><br>{{ decrypted_text }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <a href="/" class="btn-back"><i class="fas fa-arrow-left mr-2"></i> Quay lại Menu Chính</a>
+        </div>
+    </div>
+</body>
+</html>

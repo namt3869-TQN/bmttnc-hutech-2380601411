@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực hành An toàn thông tin nâng cao</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+    <style>
+        /* Toàn bộ nền web đổi sang màu Dark Blue huyền ảo theo ảnh Nakroth */
+        body {
+            background: linear-gradient(135deg, #0b111e 0%, #111a2e 50%, #070b14 100%);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        
+        .main-container {
+            max-width: 800px;
+            margin-top: 40px;
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Logo HUTECH xử lý để hòa hợp với nền tối */
+        .logo-box img {
+            width: 250px;
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        h4 {
+            color: #38bdf8;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .student-info {
+            background: rgba(30, 41, 59, 0.5);
+            border-left: 4px solid #38bdf8;
+            padding: 12px 20px;
+            border-radius: 0 12px 12px 0;
+            display: inline-block;
+            margin-top: 15px;
+            margin-bottom: 35px;
+        }
+
+        /* Biến danh sách Link cũ thành các nút bấm lớn bo góc đổ bóng cực chất */
+        .custom-list-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 650px;
+        }
+
+        .cipher-item {
+            list-style: none;
+        }
+
+        .cipher-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            color: #94a3b8;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .cipher-link i {
+            margin-right: 12px;
+            font-size: 18px;
+            color: #38bdf8;
+        }
+
+        /* Hiệu ứng rê chuột phát sáng màu xanh Neon */
+        .cipher-link:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container d-flex justify-content-center">
+        <div class="main-container text-center w-100">
+            
+            <div class="logo-box mb-4">
+                <img src="https://file1.hutech.edu.vn/file/editor/homepage/stories/hinh34/logo%20CMYK-01.png" alt="HUTECH">
+            </div>
+            
+            <h4>BÀI THỰC HÀNH BẢO MẬT THÔNG TIN NÂNG CAO</h4>
+            
+            <div class="student-info text-left">
+                <span style="color: #94a3b8; font-size: 15px;">Sinh viên thực hiện:</span>
+                <div style="font-size: 18px; font-weight: 700; color: #f1f5f9; margin-top: 2px;">
+                    Trần Quốc Nam <span style="color: #38bdf8; font-weight: 400; margin: 0 8px;">|</span> MSSV: 2380601411
+                </div>
+            </div>
+            
+            <ul class="custom-list-group">
+                <li class="cipher-item">
+                    <a href="/caesar" class="cipher-link">
+                        <i class="fas fa-font"></i> Caesar Cipher
+                    </a>
+                </li>
+                <li class="cipher-item">
+                    <a href="/vigenere" class="cipher-link">
+                        <i class="fas fa-key"></i> Vigenère Cipher
+                    </a>
+                </li>
+                <li class="cipher-item">
+                    <a href="/railfence" class="cipher-link">
+                        <i class="fas fa-stream"></i> Rail Fence Cipher
+                    </a>
+                </li>
+                <li class="cipher-item">
+                    <a href="/playfair" class="cipher-link">
+                        <i class="fas fa-th-large"></i> Playfair Cipher
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+</html>
